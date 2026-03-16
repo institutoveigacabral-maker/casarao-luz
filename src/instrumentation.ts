@@ -6,3 +6,16 @@ export async function register() {
     await import("../sentry.edge.config");
   }
 }
+
+export const onRequestError = async (
+  err: { digest: string } & Error,
+  request: {
+    path: string;
+    method: string;
+    headers: { [key: string]: string };
+  },
+  context: { routerKind: string; routePath: string; routeType: string; renderSource: string }
+) => {
+  const { captureRequestError } = await import("@sentry/nextjs");
+  captureRequestError(err, request, context);
+};

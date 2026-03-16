@@ -21,11 +21,15 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withSentryConfig(nextConfig, {
-  org: process.env.SENTRY_ORG,
-  project: process.env.SENTRY_PROJECT,
+const sentryConfig = {
+  org: "grupo-rao-cortex3",
+  project: "casarao-luz",
   silent: !process.env.CI,
   widenClientFileUpload: true,
-  tunnelRoute: "/monitoring",
+  hideSourceMaps: true,
   disableLogger: true,
-});
+};
+
+export default process.env.NEXT_PUBLIC_SENTRY_DSN
+  ? withSentryConfig(nextConfig, sentryConfig)
+  : nextConfig;
