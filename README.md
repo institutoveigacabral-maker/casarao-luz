@@ -122,6 +122,23 @@ O servidor inicia em `http://localhost:3000`.
 
 ---
 
+## Scripts
+
+| Comando | Descricao |
+|---------|-----------|
+| `pnpm dev` | Servidor de desenvolvimento |
+| `pnpm build` | Build de producao |
+| `pnpm start` | Iniciar servidor de producao |
+| `pnpm lint` | Executar ESLint |
+| `pnpm test` | Executar todos os testes |
+| `pnpm test:watch` | Testes em modo watch |
+| `pnpm format` | Formatar codigo com Prettier |
+| `pnpm format:check` | Verificar formatacao |
+| `pnpm drizzle-kit push` | Aplicar schema no banco |
+| `pnpm drizzle-kit generate` | Gerar migration |
+
+---
+
 ## Testes
 
 O projeto possui **219 testes** cobrindo calculos luminotecnicos, conformidade NBR 8995-1, validacao de schemas, APIs, autenticacao, catalogo de produtos e o programa Seja Luz.
