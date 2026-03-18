@@ -1,15 +1,8 @@
 # Casarao Luz
 
-Sistema de projetos luminotecnicos com conformidade NBR 8995-1.
-
 ![CI](https://github.com/institutoveigacabral-maker/casarao-luz/actions/workflows/ci.yml/badge.svg)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
----
-
-## Sobre
-
-Casarao Luz e uma plataforma web para gestao de projetos de iluminacao arquitetural. O sistema permite criar projetos, cadastrar ambientes, selecionar luminarias LED de um catalogo tecnico e verificar automaticamente a conformidade com a norma **NBR 8995-1** (iluminacao de ambientes de trabalho). Inclui calculos luminotecnicos em tempo real, geracao de Bill of Quantities (BOQ) e o programa de fidelidade **Seja Luz** para profissionais do setor.
+Plataforma web para gestao de projetos luminotecnicos com conformidade automatizada a norma **NBR 8995-1** (iluminacao de ambientes de trabalho). O sistema permite criar projetos, cadastrar ambientes, selecionar luminarias LED de um catalogo tecnico e verificar conformidade em tempo real, incluindo calculos luminotecnicos, geracao de Bill of Quantities (BOQ) e o programa de fidelidade **Seja Luz** para profissionais do setor.
 
 ---
 
@@ -75,7 +68,7 @@ Casarao Luz e uma plataforma web para gestao de projetos de iluminacao arquitetu
 
 ---
 
-## Getting Started
+## Setup Local
 
 ### Pre-requisitos
 
@@ -139,42 +132,6 @@ O servidor inicia em `http://localhost:3000`.
 
 ---
 
-## Testes
-
-O projeto possui **219 testes** cobrindo calculos luminotecnicos, conformidade NBR 8995-1, validacao de schemas, APIs, autenticacao, catalogo de produtos e o programa Seja Luz.
-
-```bash
-# Rodar todos os testes
-pnpm test
-
-# Modo watch
-pnpm test:watch
-```
-
-### Cobertura dos Testes
-
-| Modulo | Escopo |
-|--------|--------|
-| `nbr-8995-compliance` | Regras NBR 8995-1, limites de lux e CRI por atividade |
-| `lighting-calculations` | Calculos de lux, eficiencia, custo energetico |
-| `schema-validation` | Validacao de schemas Drizzle e tipos |
-| `schema-tables` | Estrutura de tabelas e relacoes |
-| `api-projects-validation` | Validacao de entrada na API de projetos |
-| `api-spaces-validation` | Validacao de entrada na API de ambientes |
-| `api-boq-validation` | Validacao de entrada na API de BOQ |
-| `api-register-validation` | Validacao de registro de usuarios |
-| `product-catalog` | Catalogo de luminarias LED |
-| `seed-data` | Dados de seed e regras de conformidade |
-| `auth-flow` | Fluxo de autenticacao |
-| `reward-rates` | Taxas de conversao do Seja Luz |
-| `ranking-period` | Periodos de ranking mensal/anual |
-| `profile-validation` | Validacao de perfil profissional |
-| `activity-labels` | Labels de tipos de atividade |
-| `project-metrics-aggregation` | Agregacao de metricas por projeto |
-| `utils` | Funcoes utilitarias |
-
----
-
 ## Arquitetura
 
 ```
@@ -205,47 +162,44 @@ casarao-luz/
 
 ### Modelo de Dados
 
-O schema cobre 10 tabelas com relacoes:
+O schema cobre 11 tabelas com relacoes:
 
-- **users** — Usuarios do sistema
-- **projects** — Projetos luminotecnicos (tipos: corporativo, residencial, comercial, hospitalar, educacional)
-- **spaces** — Ambientes dentro de projetos (com area, pe-direito, tipo de atividade)
-- **products** — Catalogo de luminarias LED
-- **boq_items** — Itens do Bill of Quantities (ligando ambientes a produtos)
-- **compliance_rules** — Regras NBR 8995-1 por tipo de atividade
-- **professionals** — Profissionais do programa Seja Luz
-- **point_transactions** — Transacoes de pontos
-- **rewards** — Recompensas resgatadas
-- **rankings** — Rankings periodicos
-- **achievements** — Conquistas e badges
+- **users** -- Usuarios do sistema
+- **projects** -- Projetos luminotecnicos (tipos: corporativo, residencial, comercial, hospitalar, educacional)
+- **spaces** -- Ambientes dentro de projetos (com area, pe-direito, tipo de atividade)
+- **products** -- Catalogo de luminarias LED
+- **boq_items** -- Itens do Bill of Quantities (ligando ambientes a produtos)
+- **compliance_rules** -- Regras NBR 8995-1 por tipo de atividade
+- **professionals** -- Profissionais do programa Seja Luz
+- **point_transactions** -- Transacoes de pontos
+- **rewards** -- Recompensas resgatadas
+- **rankings** -- Rankings periodicos
+- **achievements** -- Conquistas e badges
 
 ---
 
 ## Deploy
 
-### Vercel
+O projeto esta configurado para deploy na **Vercel**.
 
-O projeto esta configurado para deploy na Vercel com as seguintes variaveis de ambiente:
+### Variaveis de Ambiente (Producao)
 
-- `DATABASE_URL` — Connection string do Neon PostgreSQL
-- `AUTH_SECRET` — Secret do NextAuth.js
-- `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` — OAuth Google
-- `SENTRY_DSN` — Monitoramento Sentry
+| Variavel | Descricao |
+|----------|-----------|
+| `DATABASE_URL` | Connection string do Neon PostgreSQL |
+| `AUTH_SECRET` | Secret do NextAuth.js |
+| `GOOGLE_CLIENT_ID` | OAuth Google (client ID) |
+| `GOOGLE_CLIENT_SECRET` | OAuth Google (client secret) |
+| `SENTRY_DSN` | Monitoramento Sentry |
 
-### Neon
+### Banco de Dados (Neon)
 
-O banco de dados utiliza Neon (PostgreSQL serverless) com driver `@neondatabase/serverless`. As migrations sao gerenciadas pelo Drizzle Kit:
+O banco utiliza Neon (PostgreSQL serverless) com driver `@neondatabase/serverless`. As migrations sao gerenciadas pelo Drizzle Kit:
 
 ```bash
 pnpm drizzle-kit push      # Aplicar schema
 pnpm drizzle-kit generate   # Gerar migration
 ```
-
----
-
-## Contribuindo
-
-Consulte o guia de contribuicao em [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
